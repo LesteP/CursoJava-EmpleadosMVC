@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <mapping class="com.luis.empleados.modelo.Proyecto"/>
+    <mapping class="com.luis.empleados.modelo.Puesto"/>
+    <mapping class="com.luis.empleados.modelo.Idioma"/>
+    <mapping class="com.luis.empleados.modelo.EmpleadoProyecto"/>
+    <mapping class="com.luis.empleados.modelo.Departamento"/>
+    <mapping class="com.luis.empleados.modelo.Empleado"/>
+    <mapping class="com.luis.empleados.modelo.EmpleadoProyectoId"/>
+  </session-factory>
+</hibernate-configuration>
