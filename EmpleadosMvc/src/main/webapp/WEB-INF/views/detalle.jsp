@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,20 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>
-<c:forEach items="${empleados }" var="empleado">
-	<tr>
-		<td>${empleado.nombre }</td>
-		<td>${empleado.salario }</td>
-		<td><a href="detalle.html?id=${empleado.idEmpleado}">
-				Ver detalle
-			</a>
-		</td>
-	</tr>
-
-
-</c:forEach>
-</table>
+Nombre: ${empleado.nombre}<br />
+Salario: ${empleado.salario}<br />
+Puesto: ${empleado.puesto.nombre}<br />
+Fecha de alta: ${empleado.fechaAlta}<br />
+Departamento: ${empleado.departamento.nombre}<br />
 
 </body>
 </html>
