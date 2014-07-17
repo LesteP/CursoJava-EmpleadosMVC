@@ -10,7 +10,10 @@ src='<c:url value="/resources/js/jquery-1.11.1.min.js" />'></script>
 <title>Insert title here</title>
 </head>
 <body>
-<table>
+Buscar:<input type="text" id="txtBuscar" 
+				placeholder="Pon tu busqueda">
+	   <input type="button" id="btnBuscar" value="buscar" onclick="buscar()"> 
+<table id="tblDatos">
 <c:forEach items="${empleados }" var="empleado">
 	<tr>
 		<td>${empleado.nombre }</td>
@@ -33,6 +36,42 @@ src='<c:url value="/resources/js/jquery-1.11.1.min.js" />'></script>
 
 </div>
 <script type="text/javascript">
+function buscar(){
+	var tx=$("#txtBuscar").val();
+	var url="empleado/buscar/"+tx;	
+
+	$.get(url,function(res){
+
+		var tabla=$("#tblDatos");
+
+		$("#tblDatos tr").each(function(){
+				$(this).remove();
+
+			});
+
+
+
+		for(var i=0;i<res.length;i++){
+			var h="<tr>";
+			h+="<td>"+res[i].nombre+"</td>";
+			h+="<td>"+res[i].salario+"</td>";
+			h+="<td><a href='detalle.html?id="+
+					res[i].idEmpleado+"'>Detalle</a>";
+			h+="<a href='#' onclick='evento("+
+				res[i].idEmpleado+")'>Detalle ajax</a></td>";
+			h+="</tr>";	
+			tabla.append(h);
+			}
+
+
+
+
+
+		});
+	
+}
+
+
 function evento(id){
 
 	var url="empleado/"+id;
