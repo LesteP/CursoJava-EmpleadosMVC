@@ -50,7 +50,9 @@ function borrar(id){
 				method: "DELETE",
 				contentType: "application/json",
 				success: function(res){
-					alert(res);
+					alert("Empleado borrado correctamente");
+					$("#txtBuscar").text("");
+					buscar();
 
 					},
 				error: function(res){
@@ -69,6 +71,8 @@ function borrar(id){
 
 function buscar(){
 	var tx=$("#txtBuscar").val();
+	if(tx=="")
+		tx="NoBuscoNada";
 	var url="empleado/buscar/"+tx;	
 
 	$.get(url,function(res){
@@ -90,6 +94,8 @@ function buscar(){
 					res[i].idEmpleado+"'>Detalle</a>";
 			h+="<a href='#' onclick='evento("+
 				res[i].idEmpleado+")'>Detalle ajax</a></td>";
+			h+="<a href='#' onclick='borrar("+
+				res[i].idEmpleado+")'>Borrar</a></td>";
 			h+="</tr>";	
 			tabla.append(h);
 			}

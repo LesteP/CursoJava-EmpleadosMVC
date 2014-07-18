@@ -36,6 +36,9 @@ public class EmpleadosRestController {
 	public @ResponseBody List<Empleado> 
 				buscar(@PathVariable String texto){
 	
+		if(texto.equals("NoBuscoNada"))
+			texto="";
+		
 		Map<String, Object> params=new HashMap();
 		params.put("texto", "%"+texto+"%");
 		List<Empleado> l=dao.find("empleado.buscador", params);
