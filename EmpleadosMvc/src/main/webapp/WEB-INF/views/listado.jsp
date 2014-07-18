@@ -25,7 +25,8 @@ Buscar:<input type="text" id="txtBuscar"
 					onclick="evento(${empleado.idEmpleado})">
 				Detalle Ajax
 			</a>
-			
+			<a href="#" id="lnkBorrar" 
+			onclick="borrar(${empleado.idEmpleado})">Borrar</a>
 		</td>
 	</tr>
 
@@ -36,6 +37,36 @@ Buscar:<input type="text" id="txtBuscar"
 
 </div>
 <script type="text/javascript">
+
+function borrar(id){
+
+	var datos={idEmpleado:id};
+
+	var datosPasar=JSON.stringify(datos);
+
+	$.ajax(
+			"empleado",{
+				data:datosPasar,
+				method: "DELETE",
+				contentType: "application/json",
+				success: function(res){
+					alert(res);
+
+					},
+				error: function(res){
+					alert(JSON.stringify(res));
+					}
+
+
+				}
+			);
+
+
+
+	
+}
+
+
 function buscar(){
 	var tx=$("#txtBuscar").val();
 	var url="empleado/buscar/"+tx;	
@@ -65,7 +96,7 @@ function buscar(){
 
 
 
-
+		"<a href='detalle.html?id=22'>Ver detalle</a>"
 
 		});
 	
