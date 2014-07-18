@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HolaMundoController {
-
+//te acuerdas?
 	@RequestMapping(value="/holamundo.html")
 	public String hola(Model modelo){
 		
