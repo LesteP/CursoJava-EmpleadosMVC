@@ -90,10 +90,10 @@ function buscar(){
 			var h="<tr>";
 			h+="<td>"+res[i].nombre+"</td>";
 			h+="<td>"+res[i].salario+"</td>";
-			h+="<td><a href='detalle.html?id="+
-					res[i].idEmpleado+"'>Detalle</a>";
+			h+="<td><a href='detalle_"+
+					res[i].idEmpleado+".html'>Detalle</a> ";
 			h+="<a href='#' onclick='evento("+
-				res[i].idEmpleado+")'>Detalle ajax</a></td>";
+				res[i].idEmpleado+")'>Detalle ajax</a> ";
 			h+="<a href='#' onclick='borrar("+
 				res[i].idEmpleado+")'>Borrar</a></td>";
 			h+="</tr>";	
