@@ -12,6 +12,7 @@
 
 	Datos del empleado<br />
 	<form:form method="post" commandName="empleado">
+		<form:hidden path="idEmpleado"/>
 		Nombre:<form:input path="nombre"/><br />
 		Salario:<form:input path="salario"/><br />
 		Puesto: <form:select path="idPuesto">

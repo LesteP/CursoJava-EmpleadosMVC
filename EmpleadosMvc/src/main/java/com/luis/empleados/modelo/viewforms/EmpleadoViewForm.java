@@ -1,7 +1,11 @@
 package com.luis.empleados.modelo.viewforms;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.luis.empleados.modelo.Departamento;
 import com.luis.empleados.modelo.Empleado;
+import com.luis.empleados.modelo.Idioma;
 import com.luis.empleados.modelo.Puesto;
 
 public class EmpleadoViewForm {
@@ -11,7 +15,7 @@ public class EmpleadoViewForm {
 	private Double salario;
 	private Integer idPuesto;
 	private Integer idDepartamento;
-	
+	private Integer[] idIdioma;
 	
 	
 	public EmpleadoViewForm() {
@@ -41,6 +45,14 @@ public class EmpleadoViewForm {
 		p.setIdPuesto(idPuesto);
 		emple.setPuesto(p);
 		
+		Set<Idioma> s=new HashSet<Idioma>();
+		for (Integer idioma : idIdioma) {
+			Idioma i=new Idioma();
+			i.setIdIdioma(idioma);
+			s.add(i);
+		}
+		emple.setIdiomas(s);
+		
 		return emple;
 	}
 
@@ -52,6 +64,11 @@ public class EmpleadoViewForm {
 				getIdDepartamento());
 		setIdPuesto(emple.getPuesto().getIdPuesto());
 		
+		idIdioma=new Integer[emple.getIdiomas().size()];
+		int i=0;
+		for (Idioma idioma : emple.getIdiomas()) {
+			idIdioma[i++]=idioma.getIdIdioma();
+		}
 		
 	}
 
@@ -84,6 +101,18 @@ public class EmpleadoViewForm {
 	}
 	public void setIdDepartamento(Integer idDepartamento) {
 		this.idDepartamento = idDepartamento;
+	}
+
+
+
+	public Integer[] getIdIdioma() {
+		return idIdioma;
+	}
+
+
+
+	public void setIdIdioma(Integer[] idIdioma) {
+		this.idIdioma = idIdioma;
 	}
 	
 	

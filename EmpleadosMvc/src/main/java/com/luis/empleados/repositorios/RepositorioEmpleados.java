@@ -13,6 +13,7 @@ public class RepositorioEmpleados extends Repositorio<Empleado> {
 		
 		Hibernate.initialize(e.getDepartamento());
 		Hibernate.initialize(e.getPuesto());
+		Hibernate.initialize(e.getIdiomas());
 		
 		return e;
 	}

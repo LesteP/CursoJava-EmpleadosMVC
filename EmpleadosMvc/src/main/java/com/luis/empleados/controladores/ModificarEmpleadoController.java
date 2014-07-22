@@ -1,7 +1,6 @@
 package com.luis.empleados.controladores;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,21 +10,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.luis.empleados.modelo.Departamento;
 import com.luis.empleados.modelo.Empleado;
-import com.luis.empleados.modelo.Puesto;
 import com.luis.empleados.modelo.viewforms.EmpleadoViewForm;
 import com.luis.empleados.repositorios.RepositorioDepartamento;
 import com.luis.empleados.repositorios.RepositorioEmpleados;
 import com.luis.empleados.repositorios.RepositorioIdiomas;
 import com.luis.empleados.repositorios.RepositorioPuesto;
 
+
 @Controller
-@RequestMapping(value="altaEmpleado.html")
-public class EmpleadosAltaController {
+@RequestMapping(value="modificarEmpleado.html")
+public class ModificarEmpleadoController {
 
 	@Autowired
 	RepositorioEmpleados dao;
@@ -36,12 +35,13 @@ public class EmpleadosAltaController {
 	@Autowired 
 	RepositorioIdiomas daoIdiomas;
 	
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String alta(ModelMap modelo){
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public String modificar(ModelMap modelo, @PathVariable int id){
 		
-		EmpleadoViewForm empleado=new EmpleadoViewForm();
-		modelo.addAttribute("empleado", empleado);
+		Empleado emple=dao.get(Empleado.class, id);
+		EmpleadoViewForm ev=new EmpleadoViewForm();
+		ev.fromEmpleado(emple);
+		modelo.addAttribute("empleado", ev);
 		
 		Map<Integer,String> lp=daoPuesto.getMapaOptions();
 		Map<Integer,String> ld=daoDepartamento.getMapaOptions();
@@ -50,12 +50,13 @@ public class EmpleadosAltaController {
 		modelo.addAttribute("puestos", lp);
 		modelo.addAttribute("departamentos",ld);
 		modelo.addAttribute("idiomas",li);
-		return "alta";
 		
+		
+		return "modificar";
 	}
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value="/{id}",method=RequestMethod.POST)
 	public String 
-		doAlta(@ModelAttribute("empleado") EmpleadoViewForm empleado,
+		doModificar(@ModelAttribute("empleado") EmpleadoViewForm empleado,
 				BindingResult resultado,
 				HttpServletRequest request){
 		
@@ -66,14 +67,13 @@ public class EmpleadosAltaController {
 			request.setAttribute("puestos", lp);
 			request.setAttribute("departamentos",ld);
 			request.setAttribute("idiomas",li);
-			return "alta";
+			return "modificar";
 			
 		}
 		Empleado emple=empleado.getEmpleado();
 		emple.setFechaAlta(new Date());
-		dao.add(emple);
+		dao.update(emple);
 		
 		return "redirect:/listado.html";
 	}
-	
 }
