@@ -15,6 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -127,8 +128,13 @@ public class Empleado  implements java.io.Serializable {
         this.fechaAlta = fechaAlta;
     }
 
-@ManyToMany(fetch=FetchType.LAZY, mappedBy="empleados")
-    public Set<Idioma> getIdiomas() {
+
+@ManyToMany(fetch=FetchType.LAZY)
+@JoinTable(name="idioma_empleado", catalog="teide2014", joinColumns = { 
+    @JoinColumn(name="idEmpleado", nullable=false, updatable=false) }, inverseJoinColumns = { 
+    @JoinColumn(name="idIdioma", nullable=false, updatable=false) })
+    
+public Set<Idioma> getIdiomas() {
         return this.idiomas;
     }
     

@@ -62,11 +62,7 @@ public class Idioma  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name="idioma_empleado", catalog="teide2014", joinColumns = { 
-        @JoinColumn(name="idIdioma", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="idEmpleado", nullable=false, updatable=false) })
+    @ManyToMany(fetch=FetchType.LAZY, mappedBy="idiomas")
     public Set<Empleado> getEmpleados() {
         return this.empleados;
     }
