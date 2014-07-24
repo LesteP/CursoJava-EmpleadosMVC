@@ -128,7 +128,7 @@ public class Empleado  implements java.io.Serializable {
         this.fechaAlta = fechaAlta;
     }
 
-
+/*Las siguientes cuatro lineas de comandos son las modificaciones que  se hicieron para que funcionase el programa*/
 @ManyToMany(fetch=FetchType.LAZY)
 @JoinTable(name="idioma_empleado", catalog="teide2014", joinColumns = { 
     @JoinColumn(name="idEmpleado", nullable=false, updatable=false) }, inverseJoinColumns = { 
